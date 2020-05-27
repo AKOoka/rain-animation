@@ -6,22 +6,15 @@ class Unit {
     this.y = y
     this.speed = speed
     this.size = size
+    this.halfSize = size / 2
     this.color = color
   }
 
-  draw (ctx) {}
-
-  update (ctx, canvas) {
-    this.y = (this.y + this.speed) % canvas.height
-
-    this.draw(ctx)
-  }
-
-  static generate (canvas) {
-    const x = randomInRange(0, canvas.width)
-    const y = randomInRange(-25, canvas.height)
+  static generate (width, height) {
+    const x = randomInRange(0, width)
+    const y = randomInRange(-25, height)
     const size = randomInRange(10, 25)
-    const speed = randomInRange(1, 5)
+    const speed = randomInRange(2, 5)
 
     const red = randomInRange(0, 255)
     const green = randomInRange(0, 255)

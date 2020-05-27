@@ -10,18 +10,10 @@ class Character extends Unit {
     this.fontFamily = fontFamily
   }
 
-  draw (ctx) {
-    ctx.fillStyle = this.color
-
-    ctx.font = `${this.fontStyle} ${this.size}px ${this.fontFamily}`
-
-    ctx.fillText(this.character, this.x, this.y)
-  }
-
-  static generate (canvas) {
+  static generate (width, height) {
     const characterPool = '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÄÅÆÇÈËÌÏÐÑÒÕÖ×ØÙÜÝÞßàäåæçèëìïðñòö÷øùüýþÿАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя'
 
-    const unit = super.generate(canvas)
+    const unit = super.generate(width, height)
 
     unit.character = characterPool[randomInRange(0, characterPool.length - 1)]
     unit.fontStyle = 'normal'
