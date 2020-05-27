@@ -69,4 +69,4 @@ init(canvas, ctx, pool)
 
 animate = true
 
-anime(canvas, pool, ctx)
+anime()
