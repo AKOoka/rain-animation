@@ -9,7 +9,6 @@
 <canvas id="rain-animation"></canvas>
 
 <style type="text/css">
-
 html {
   overflow: hidden;
 }
@@ -18,120 +17,8 @@ body {
   margin: 0;
   padding: 0;
 }
-
 </style>
-<script type="text/javascript">
-const canvas = document.getElementById('rain-animation')
-const ctx = canvas.getContext('2d')
 
-const dropsPool = []
-
-const bgColor = '0, 0, 0'
-
-let animate = false
-
-function randomInRange (min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min)
-}
-
-function collision () {
-
-}
-
-function onKeydownEvent (event) {
-  if (event.key === 'Escape') {
-    animate = false
-  } else if (event.key === 'Enter') {
-    animate = true
-
-    anime()
-  }
-}
-
-class Drop {
-  constructor (x, y, size, speed, color) {
-    this.x = x
-    this.y = y
-    this.size = size
-    this.speed = speed
-    this.color = color
-  }
-
-  drawRainDrop () {
-    ctx.fillStyle = this.color
-
-    const halfSize = this.size / 2
-
-    ctx.beginPath()
-    ctx.moveTo(this.x, this.y)
-    ctx.bezierCurveTo(this.x - halfSize, this.y + this.size, this.x + halfSize, this.y + this.size, this.x, this.y)
-    ctx.fill()
-  }
-
-  drawSomeShape () {
-    const halfSize = this.size / 2
-
-    ctx.beginPath()
-    ctx.moveTo(this.x, this.y)
-    ctx.lineTo(this.x - halfSize, this.y + halfSize)
-    ctx.quadraticCurveTo(this.x, this.y + this.size, this.x + halfSize, this.y + halfSize)
-    ctx.lineTo(this.x, this.y)
-    ctx.fill()
-  }
-
-  drawRectangle () {
-    ctx.fillRect(this.x, this.y, this.size, this.size)
-  }
-
-  update () {
-    this.y = (this.y + this.speed) % canvas.height
-
-    this.drawRainDrop()
-  }
-}
-
-function init () {
-  document.onkeydown = onKeydownEvent
-
-  canvas.width = window.innerWidth
-  canvas.height = window.innerHeight
-
-  for (let i = 0; i < 500; i++) {
-    const x = randomInRange(0, canvas.width)
-    const y = randomInRange(-10, canvas.height)
-    const size = randomInRange(10, 25)
-    const speed = randomInRange(1, 10)
-
-    const red = randomInRange(0, 255)
-    const green = randomInRange(0, 255)
-    const blue = randomInRange(0, 255)
-
-    const color = `rgb(${red}, ${green}, ${blue})`
-
-    dropsPool.push(new Drop(x, y, size, speed, color))
-  }
-
-  ctx.fillStyle = `rgb(${bgColor})`
-  ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-  animate = true
-}
-
-function anime () {
-  if (!animate) {
-    return
-  }
-
-  ctx.fillStyle = `rgba(${bgColor}, 0.3)`
-  ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-  dropsPool.forEach(drop => { drop.update() })
-
-  requestAnimationFrame(anime)
-}
-
-init()
-anime()
-</script>
+<script type="module" src="main.js"></script>
 </body>
 </html>
